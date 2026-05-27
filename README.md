@@ -64,19 +64,19 @@ It prints the saved paths as JSON, e.g. `{"saved": ["./image-20260527-150000.png
 
 ## Commands
 
-These three form a single plan → verify → implement → verify workflow. Use them in sequence: `/structure-plan` to draft, `/audit-plan` to validate the draft against real code, build, then `/audit-implementation` to confirm the build matches the plan.
+These three form a single `/structure-plan` → `/audit-plan` → build → `/audit-implementation` workflow. They exist to solve a specific problem: a fresh Claude session has **no reliable knowledge of the repo** it's working in. Whatever lives in memory may be stale, and reading the whole codebase up front floods the context with detail that drowns out the task. The workflow is therefore a deliberate two-phase reading strategy — **broad-and-shallow first, narrow-and-deep second** — that builds just enough accurate context to write code that actually fits, without polluting the context window.
 
 ### `/structure-plan`
 
-Turns a feature name (or a hyphenated list of features) into one concrete implementation plan: what to build, every file to create or modify, the types/interfaces/schemas involved, the dependency-ordered sequence, and the assumptions `/audit-plan` should later verify.
+The broad, shallow pass. Claude reads the *shape* of the codebase — the types, interfaces, functions, and variables relevant to the work, noting where they live (files and line numbers) — but deliberately **does not** read exact implementation bodies or trace how each symbol ripples through the rest of the code. The output is one concrete plan: what to build, every file to create or modify, the types/interfaces/schemas involved, the dependency-ordered sequence, and the assumptions that `/audit-plan` will later verify. This establishes a cheap, approximate map of the territory without spending context on detail that may not matter.
 
 ### `/audit-plan`
 
-Audits the plan above against the actual code surface before any implementation begins — reads the real files/functions/modules the plan references, verifies signatures, types, exports, and dependencies, flags gaps between the plan's assumptions and reality, and revises the plan where it was wrong.
+The narrow, deep pass. Using the regions `/structure-plan` already identified, Claude now reads the **exact implementation details** of just those areas — verifying the assumptions the plan made, confirming real type and interface shapes, signatures, exports, and dependencies. Because it's scoped to the regions that matter, it gets precision without pulling unnecessary code into context. The goal is to ensure the planned code will genuinely fit the codebase's architecture and contracts — not merely match the surface "vibe" of the surrounding code — and to revise the plan wherever an assumption turns out to be wrong, before a single line is written.
 
 ### `/audit-implementation`
 
-Audits a finished implementation against the plan that produced it — checks signatures, logic, exports, and edge cases against the spec, lists any divergences or missing pieces with their impact, and produces a verdict (fully / partially / incorrectly implemented) before any remediation.
+The closing check. After the code is written, Claude audits what was actually built against what the final plan/spec required — checking signatures, logic, exports, and edge cases against the spec, listing any divergences or missing pieces with their impact, and producing a verdict (fully / partially / incorrectly implemented) before any remediation. This confirms the implementation meets the standard and functionality the plan set out, rather than something that merely looks plausible.
 
 ## Installation
 
