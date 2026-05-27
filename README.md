@@ -103,3 +103,7 @@ Restart Claude Code (or start a new session) so it picks up the newly symlinked 
 ## Notes
 
 No secrets are committed to this repo. The `imagegen` skill needs your own `OPENAI_API_KEY`, supplied via one of the resolution paths listed above.
+
+## License
+
+[MIT](LICENSE)
