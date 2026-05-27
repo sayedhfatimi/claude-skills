@@ -64,6 +64,8 @@ It prints the saved paths as JSON, e.g. `{"saved": ["./image-20260527-150000.png
 
 ## Commands
 
+These are general-purpose development commands — language- and stack-agnostic, usable on any codebase regardless of framework (unlike the stack-specific `imagegen` skill above).
+
 These three form a single `/structure-plan` → `/audit-plan` → build → `/audit-implementation` workflow. They exist to solve a specific problem: a fresh Claude session has **no reliable knowledge of the repo** it's working in. Whatever lives in memory may be stale, and reading the whole codebase up front floods the context with detail that drowns out the task. The workflow is therefore a deliberate two-phase reading strategy — **broad-and-shallow first, narrow-and-deep second** — that builds just enough accurate context to write code that actually fits, without polluting the context window.
 
 ### `/structure-plan`
