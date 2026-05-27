@@ -90,6 +90,8 @@ cd claude-skills
 ./install.sh
 ```
 
+To pin to a specific release instead of tracking `main`, clone a tag: `git clone --branch v1.0.0 --depth 1 https://github.com/sayedhfatimi/claude-skills.git` (see [Versioning](#versioning)).
+
 `install.sh` skips any target that already exists, so it won't clobber existing skills/commands. The manual equivalent:
 
 ```bash
@@ -101,6 +103,35 @@ ln -s "$REPO/commands/structure-plan.md"        ~/.claude/commands/structure-pla
 ```
 
 Restart Claude Code (or start a new session) so it picks up the newly symlinked skills and commands.
+
+## Versioning
+
+Releases are semver git tags (`vMAJOR.MINOR.PATCH`). `main` is the rolling latest; tags mark stable points, and [`CHANGELOG.md`](CHANGELOG.md) records what changed in each one.
+
+**Pin to a version.** Clone the tag you want, then install:
+
+```bash
+git clone --branch v1.0.0 --depth 1 https://github.com/sayedhfatimi/claude-skills.git
+cd claude-skills
+./install.sh
+```
+
+**Switching versions is just a checkout.** `install.sh` symlinks the entries in `~/.claude` to files in your clone's working tree, so the *contents* the symlinks resolve to always reflect whatever you have checked out — there's nothing to re-link when you move between versions:
+
+```bash
+git -C <clone> fetch --tags && git -C <clone> checkout vX.Y.Z   # pin to a release
+git -C <clone> checkout main && git -C <clone> pull             # back to latest
+```
+
+Re-run `install.sh` only when a new version *adds* a skill or command (a brand-new file needs a new symlink); content changes to existing ones are picked up automatically.
+
+### Releasing
+
+For maintainers, to keep history clean and reproducible:
+
+- The `CHANGELOG.md` entry and the tag go in their own release commit, separate from the feature/doc commits they describe.
+- Tag from `main` (`git tag -a vX.Y.Z`), push the tag, and publish a GitHub release with notes mirroring the changelog entry.
+- Never delete, rewrite, or force-push a tag — published releases are a historical record.
 
 ## Notes
 
