@@ -25,6 +25,7 @@ claude-skills/
     audit-plan.md
     audit-implementation.md
     structure-plan.md
+    refactor-pass.md
 ```
 
 ## Skills
@@ -80,6 +81,10 @@ The narrow, deep pass. Using the regions `/structure-plan` already identified, C
 
 The closing check. After the code is written, Claude audits what was actually built against what the final plan/spec required — checking signatures, logic, exports, and edge cases against the spec, listing any divergences or missing pieces with their impact, and producing a verdict (fully / partially / incorrectly implemented) before any remediation. This confirms the implementation meets the standard and functionality the plan set out, rather than something that merely looks plausible.
 
+### `/refactor-pass`
+
+The structural-cleanup entry point — the counterpart to the plan/audit trio, run *before* `/structure-plan` when kicking off a refactor or cleanup sprint rather than building a feature. It is a read-only, stack-agnostic pass that surveys the whole project, then works through each concern category in depth — file and folder organisation, variable/function/type naming conventions, function consolidation and decomposition, type organisation, import boundaries, and dead code — and emits a single categorised `REFACTOR_PLAN.md` at the project root, complete with a priority matrix ranking each change by effort and impact. It modifies nothing but that one plan file; you review it, prune anything out of scope, and then drive the changes (optionally through `/structure-plan`). Trigger it with `/refactor-pass` or by asking Claude to "audit the codebase" or "review naming conventions".
+
 ## Installation
 
 Clone the repo, then run the installer to symlink everything into `~/.claude`:
@@ -100,6 +105,7 @@ ln -s "$REPO/skills/imagegen"                   ~/.claude/skills/imagegen
 ln -s "$REPO/commands/audit-plan.md"            ~/.claude/commands/audit-plan.md
 ln -s "$REPO/commands/audit-implementation.md"  ~/.claude/commands/audit-implementation.md
 ln -s "$REPO/commands/structure-plan.md"        ~/.claude/commands/structure-plan.md
+ln -s "$REPO/commands/refactor-pass.md"         ~/.claude/commands/refactor-pass.md
 ```
 
 Restart Claude Code (or start a new session) so it picks up the newly symlinked skills and commands.

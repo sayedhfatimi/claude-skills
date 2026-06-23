@@ -21,5 +21,6 @@ link "$REPO/skills/imagegen"                   "$CLAUDE_DIR/skills/imagegen"
 link "$REPO/commands/audit-plan.md"            "$CLAUDE_DIR/commands/audit-plan.md"
 link "$REPO/commands/audit-implementation.md"  "$CLAUDE_DIR/commands/audit-implementation.md"
 link "$REPO/commands/structure-plan.md"        "$CLAUDE_DIR/commands/structure-plan.md"
+link "$REPO/commands/refactor-pass.md"         "$CLAUDE_DIR/commands/refactor-pass.md"
 
 echo "Done. Restart Claude Code to pick up newly linked skills and commands."
