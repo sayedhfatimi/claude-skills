@@ -14,6 +14,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 - `imagegen` API reference: GPT image models don't return `revised_prompt`, and pricing is per token, not the old per-image table.
+- `imagegen`: `generate.py` now reads a `.env` that's a named pipe (as 1Password mounts them) instead of skipping it, gives up on a silent pipe after 15s, and accepts `export KEY=value` lines.
 
 ## [1.1.0] - 2026-06-23
 

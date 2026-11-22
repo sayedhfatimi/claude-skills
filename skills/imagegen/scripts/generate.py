@@ -9,26 +9,57 @@ import base64
 import json
 import os
 import sys
+import threading
 import urllib.error
 import urllib.request
 from datetime import datetime
 from pathlib import Path
 
 
+ENV_READ_TIMEOUT = 15  # seconds; a piped .env (e.g. 1Password) can block while locked
+
+
+def is_env_source(path: Path) -> bool:
+    """A .env may be a regular file or a named pipe (1Password mounts .env files as FIFOs)."""
+    return path.is_file() or path.is_fifo()
+
+
+def read_env_text(path: Path) -> str | None:
+    """Read a .env file or pipe; give up after ENV_READ_TIMEOUT if a pipe never delivers."""
+    if path.is_file():
+        return path.read_text()
+    result: list[str] = []
+    reader = threading.Thread(target=lambda: result.append(path.read_text()), daemon=True)
+    reader.start()
+    reader.join(ENV_READ_TIMEOUT)
+    if not result:
+        print(
+            f"WARNING: {path} is a pipe that sent nothing within {ENV_READ_TIMEOUT}s "
+            "(is 1Password locked?); skipping it.",
+            file=sys.stderr,
+        )
+        return None
+    return result[0]
+
+
 def load_env_file(env_path: Path) -> None:
     """Parse a .env file and set variables into os.environ (won't overwrite existing vars)."""
-    if not env_path.is_file():
+    if not is_env_source(env_path):
         return
-    with env_path.open() as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith("#") or "=" not in line:
-                continue
-            key, _, value = line.partition("=")
-            key = key.strip()
-            value = value.strip().strip('"').strip("'")
-            if key and key not in os.environ:
-                os.environ[key] = value
+    text = read_env_text(env_path)
+    if text is None:
+        return
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        if line.startswith("export "):
+            line = line[len("export "):]
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
 
 
 def find_and_load_env() -> None:
@@ -47,7 +78,7 @@ def find_and_load_env() -> None:
 
     # 2. Current working directory
     cwd_env = Path.cwd() / ".env"
-    if cwd_env.is_file():
+    if is_env_source(cwd_env):
         load_env_file(cwd_env)
         return
 
@@ -55,7 +86,7 @@ def find_and_load_env() -> None:
     current = Path.cwd()
     while True:
         candidate = current / ".env"
-        if candidate.is_file():
+        if is_env_source(candidate):
             load_env_file(candidate)
             return
         if (current / ".git").exists() or current.parent == current:
