@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 imagegen/scripts/generate.py
-Generate images via OpenAI gpt-image-1.5 and save to disk.
+Generate images via OpenAI gpt-image-2.6-sunburst and save to disk.
 """
 
 import argparse
@@ -67,7 +67,7 @@ def find_and_load_env() -> None:
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="Generate images with gpt-image-1.5")
+    p = argparse.ArgumentParser(description="Generate images with gpt-image-2.6-sunburst")
     p.add_argument("--prompt", required=True, help="Image generation prompt")
     p.add_argument(
         "--size",
@@ -80,6 +80,12 @@ def parse_args():
         default="medium",
         choices=["low", "medium", "high"],
         help="Generation quality (affects cost)",
+    )
+    p.add_argument(
+        "--complexity",
+        default=None,
+        choices=["low", "medium", "high"],
+        help="How much the model plans before rendering (2.6 models). Omit to use the model default (high).",
     )
     p.add_argument(
         "--format",
@@ -120,13 +126,16 @@ def generate(args) -> list[str]:
         sys.exit(1)
 
     payload = {
-        "model": "gpt-image-1.5",
+        "model": "gpt-image-2.6-sunburst",
         "prompt": args.prompt,
         "n": args.n,
         "size": args.size,
         "quality": args.quality,
         "output_format": args.fmt,
     }
+
+    if args.complexity:
+        payload["complexity"] = args.complexity
 
     if args.background != "auto":
         payload["background"] = args.background
