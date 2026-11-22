@@ -1,7 +1,7 @@
 ---
 name: imagegen
 description: >
-  Generate images using OpenAI's gpt-image-1.5 model via the OpenAI Images API.
+  Generate images using OpenAI's gpt-image-2.6-sunburst model via the OpenAI Images API.
   Use this skill whenever the user asks to generate, create, draw, render, or
   produce any image — illustrations, concept art, UI mockups, diagrams, icons,
   product visualisations, or any other visual output. Trigger even for casual
@@ -10,9 +10,9 @@ description: >
   refine a previously generated image. Requires OPENAI_API_KEY in the environment.
 ---
 
-# Image Generation (gpt-image-1.5)
+# Image Generation (gpt-image-2.6-sunburst)
 
-Generate images by calling the OpenAI Images API with the `gpt-image-1.5` model.
+Generate images by calling the OpenAI Images API with the `gpt-image-2.6-sunburst` model.
 
 ## Prerequisites
 
@@ -44,7 +44,8 @@ Good prompt practices to apply automatically:
 | Parameter | Default | Notes |
 |-----------|---------|-------|
 | `size` | `1024x1024` | Also supports `1536x1024` (landscape), `1024x1536` (portrait) |
-| `quality` | `medium` | `low` / `medium` / `high` — affects detail and credit cost |
+| `quality` | `medium` | `low` / `medium` / `high` — rendering quality; affects detail and cost |
+| `complexity` | model default (`high`) | `low` / `medium` / `high` — how much the model plans before rendering; lower it for simple subjects |
 | `output_format` | `png` | `png` / `jpeg` / `webp` |
 | `n` | `1` | Number of images (1–10) |
 | `background` | `auto` | `transparent` (png/webp only) / `opaque` / `auto` |
@@ -62,6 +63,7 @@ python scripts/generate.py \
   --quality medium \
   --output-dir . \
   [--n 1] \
+  [--complexity high] \
   [--format png] \
   [--background auto]
 ```
@@ -95,7 +97,7 @@ quality = "medium"
 fmt     = "png"
 
 payload = json.dumps({
-    "model": "gpt-image-1.5",
+    "model": "gpt-image-2.6-sunburst",
     "prompt": prompt,
     "n": 1,
     "size": size,
@@ -115,7 +117,7 @@ req = urllib.request.Request(
 with urllib.request.urlopen(req) as resp:
     data = json.loads(resp.read())
 
-# gpt-image-1.5 returns b64_json by default
+# gpt-image-2.6-sunburst returns b64_json by default
 img_bytes = base64.b64decode(data["data"][0]["b64_json"])
 out_path   = "output.png"
 with open(out_path, "wb") as f:
@@ -124,7 +126,7 @@ with open(out_path, "wb") as f:
 print(f"Saved: {out_path}")
 ```
 
-> **Note:** `gpt-image-1.5` always returns `b64_json` (not a URL). Always decode from base64.
+> **Note:** `gpt-image-2.6-sunburst` always returns `b64_json` (not a URL). Always decode from base64.
 
 ---
 

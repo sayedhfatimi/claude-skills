@@ -32,7 +32,7 @@ claude-skills/
 
 ### `imagegen`
 
-Generates images with OpenAI's `gpt-image-1.5` model via the [Images API](https://platform.openai.com/docs/api-reference/images). Triggers whenever you ask Claude to generate, draw, render, or refine an image.
+Generates images with OpenAI's `gpt-image-2.6-sunburst` model via the [Images API](https://platform.openai.com/docs/api-reference/images). Triggers whenever you ask Claude to generate, draw, render, or refine an image.
 
 **Prerequisite:** an `OPENAI_API_KEY`. You don't need to export it manually — `scripts/generate.py` resolves it in this order and stops at the first hit:
 
@@ -48,6 +48,7 @@ Generates images with OpenAI's `gpt-image-1.5` model via the [Images API](https:
 |-------------------|--------------|-------------|------------------------------------------------------|
 | Size              | `--size`     | `1024x1024` | `1024x1024`, `1536x1024` (landscape), `1024x1536` (portrait) |
 | Quality           | `--quality`  | `medium`    | `low`, `medium`, `high`                              |
+| Complexity        | `--complexity` | model default (`high`) | `low`, `medium`, `high` — planning before rendering |
 | Format            | `--format`   | `png`       | `png`, `jpeg`, `webp`                                |
 | Count             | `--n`        | `1`         | `1`–`10`                                             |
 | Background        | `--background` | `auto`    | `auto`, `transparent` (png/webp only), `opaque`     |

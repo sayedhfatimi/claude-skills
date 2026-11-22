@@ -4,6 +4,18 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-11-22
+
+### Changed
+- `imagegen` now uses OpenAI's `gpt-image-2.6-sunburst`, the same model as Valeon's covers (`gpt-image-1.5` is removed from the API on 1 Dec 2026).
+
+### Added
+- `imagegen`: optional `--complexity` flag (`low` / `medium` / `high`) for how much the 2.6 models plan before rendering; omitted, the model default (`high`) applies.
+
+### Fixed
+- `imagegen` API reference: GPT image models don't return `revised_prompt`, and pricing is per token, not the old per-image table.
+- `imagegen`: `generate.py` now reads a `.env` that's a named pipe (as 1Password mounts them) instead of skipping it, gives up on a silent pipe after 15s, and accepts `export KEY=value` lines.
+
 ## [1.1.0] - 2026-06-23
 
 ### Added
@@ -21,5 +33,6 @@ Initial release.
 - README documentation covering each skill/command, the workflow rationale, installation, and versioning.
 - MIT license.
 
+[1.2.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v1.2.0
 [1.1.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v1.1.0
 [1.0.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v1.0.0
