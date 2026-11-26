@@ -6,6 +6,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-11-26
+
 ### Added
 - This repo is now a Claude plugin marketplace (`.claude-plugin/marketplace.json`). Add it in Claude under Customize → Plugins, or with `/plugin marketplace add sayedhfatimi/claude-skills` in Claude Code, and install `imagegen` from it.
 
@@ -51,6 +53,7 @@ Initial release.
 - README documentation covering each skill/command, the workflow rationale, installation, and versioning.
 - MIT license.
 
+[2.0.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v2.0.0
 [1.2.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v1.2.0
 [1.1.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v1.1.0
 [1.0.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v1.0.0
