@@ -6,6 +6,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- `audit-plan` and `refactor-pass` plugins in the marketplace, so this repo is the single copy of each. Install them from the marketplace and remove any copies saved directly as skills in Claude.
+
+### Changed
+- **Breaking:** `audit-plan` and `refactor-pass` are now skills in `plugins/<name>/skills/<name>/SKILL.md` instead of commands in `commands/`. Delete the old symlinks in `~/.claude/commands/`.
+
+### Removed
+- **Breaking:** `install.sh`. It only symlinked the commands, which now ship as plugins.
+
 ## [2.0.0] - 2026-11-26
 
 ### Added

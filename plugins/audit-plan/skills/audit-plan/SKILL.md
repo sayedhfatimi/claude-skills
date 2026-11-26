@@ -1,3 +1,8 @@
+---
+name: audit-plan
+description: Use after an implementation plan is drafted and before any code is written, to audit the plan against the actual code it touches and correct wrong assumptions.
+---
+
 Audit the plan above against the relevant code surface. Before proceeding to implementation:
 
 1. Read the actual implementation of every file, function, and module referenced in the plan

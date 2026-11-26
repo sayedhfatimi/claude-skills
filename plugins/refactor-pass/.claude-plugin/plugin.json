@@ -1,0 +1,10 @@
+{
+  "name": "refactor-pass",
+  "version": "3.0.0",
+  "description": "Read-only structural review of a codebase, written up as REFACTOR_PLAN.md with a priority matrix.",
+  "author": {
+    "name": "Sayed Hamid Fatimi"
+  },
+  "repository": "https://github.com/sayedhfatimi/claude-skills",
+  "license": "MIT"
+}
