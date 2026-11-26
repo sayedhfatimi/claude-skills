@@ -6,6 +6,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-11-26
+
 ### Added
 - `audit-plan` and `refactor-pass` plugins in the marketplace, so this repo is the single copy of each. Install them from the marketplace and remove any copies saved directly as skills in Claude.
 
@@ -62,6 +64,7 @@ Initial release.
 - README documentation covering each skill/command, the workflow rationale, installation, and versioning.
 - MIT license.
 
+[3.0.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v3.0.0
 [2.0.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v2.0.0
 [1.2.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v1.2.0
 [1.1.0]: https://github.com/sayedhfatimi/claude-skills/releases/tag/v1.1.0
