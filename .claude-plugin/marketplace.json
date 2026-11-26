@@ -11,6 +11,16 @@
       "name": "imagegen",
       "source": "./plugins/imagegen",
       "description": "Generate images with OpenAI's gpt-image-2.6-sunburst model via the OpenAI Images API. Requires OPENAI_API_KEY."
+    },
+    {
+      "name": "audit-plan",
+      "source": "./plugins/audit-plan",
+      "description": "Audit a drafted implementation plan against the actual code before any code is written."
+    },
+    {
+      "name": "refactor-pass",
+      "source": "./plugins/refactor-pass",
+      "description": "Read-only structural review of a codebase, written up as REFACTOR_PLAN.md with a priority matrix."
     }
   ]
 }

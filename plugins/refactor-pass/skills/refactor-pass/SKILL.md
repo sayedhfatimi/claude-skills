@@ -1,3 +1,8 @@
+---
+name: refactor-pass
+description: "Use when asked for a refactor pass or structural review of a codebase: read-only survey of naming, structure, consolidation and dead code, written up as REFACTOR_PLAN.md."
+---
+
 Produce a comprehensive, non-destructive `REFACTOR_PLAN.md` for the current codebase — a read-only structural analysis that surveys naming, structure, consolidation, and dead code, and drives a later implementation phase.
 
 ---
@@ -227,7 +232,7 @@ API or external consumers, and anything the implementer should be aware of befor
   you might disagree with), your job is to flag *inconsistencies* with that pattern, not
   to argue against the pattern itself. Only recommend changing the convention if it is
   actively harmful (e.g., naming collisions, misleading names).
-- **No implementation.** This command produces a plan. Do not refactor anything. The user
+- **No implementation.** This skill produces a plan. Do not refactor anything. The user
   decides what to act on.
 - **Proportionality.** A 3-file utility script needs a lighter-touch plan than a 60-file
   production service. Calibrate depth of analysis and length of plan to the actual

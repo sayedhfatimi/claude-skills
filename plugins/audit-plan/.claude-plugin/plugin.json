@@ -1,0 +1,10 @@
+{
+  "name": "audit-plan",
+  "version": "3.0.0",
+  "description": "Audit a drafted implementation plan against the actual code before any code is written.",
+  "author": {
+    "name": "Sayed Hamid Fatimi"
+  },
+  "repository": "https://github.com/sayedhfatimi/claude-skills",
+  "license": "MIT"
+}
