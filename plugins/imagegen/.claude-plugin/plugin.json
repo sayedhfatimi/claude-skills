@@ -1,0 +1,10 @@
+{
+  "name": "imagegen",
+  "version": "2.0.0",
+  "description": "Generate images with OpenAI's gpt-image-2.6-sunburst model via the OpenAI Images API. Requires OPENAI_API_KEY.",
+  "author": {
+    "name": "Sayed Hamid Fatimi"
+  },
+  "repository": "https://github.com/sayedhfatimi/claude-skills",
+  "license": "MIT"
+}

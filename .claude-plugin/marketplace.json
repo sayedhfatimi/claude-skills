@@ -1,0 +1,16 @@
+{
+  "name": "claude-skills",
+  "owner": {
+    "name": "Sayed Hamid Fatimi"
+  },
+  "metadata": {
+    "description": "Sayed's personal Claude plugins."
+  },
+  "plugins": [
+    {
+      "name": "imagegen",
+      "source": "./plugins/imagegen",
+      "description": "Generate images with OpenAI's gpt-image-2.6-sunburst model via the OpenAI Images API. Requires OPENAI_API_KEY."
+    }
+  ]
+}
