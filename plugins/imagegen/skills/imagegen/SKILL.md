@@ -54,10 +54,10 @@ Choose `landscape` or `portrait` automatically based on the subject when the use
 
 ### 3. Generate the image
 
-Use the generation script:
+Use the generation script, which lives in this skill's own folder (the base directory shown when the skill loads). Run it by that full path so the image is saved in the current working directory, not the skill folder:
 
 ```bash
-python scripts/generate.py \
+python <skill-base-dir>/scripts/generate.py \
   --prompt "<prompt>" \
   --size 1024x1024 \
   --quality medium \
@@ -150,5 +150,5 @@ If the user wants to adjust a generated image:
 
 ## Reference
 
-Full API reference: `references/openai-images-api.md`
+Full API reference: `references/openai-images-api.md` in this skill's folder
 (Read this file for advanced parameters: `moderation`, `partial_images`, streaming generation.)

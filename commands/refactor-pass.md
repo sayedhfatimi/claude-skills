@@ -244,5 +244,6 @@ When the plan is written:
    - Total files analysed
    - Count of findings per category
    - Top 3 highest-priority items from the Priority Matrix
-3. Suggest the next step: review the plan, prune anything out of scope, then run
-   `/structure-plan` or begin implementation with the highest-priority items.
+3. Suggest the next step: review the plan, prune anything out of scope, then turn the
+   chosen items into an implementation plan (superpowers:writing-plans) or begin
+   implementation with the highest-priority items.

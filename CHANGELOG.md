@@ -6,9 +6,18 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- This repo is now a Claude plugin marketplace (`.claude-plugin/marketplace.json`). Add it in Claude under Customize → Plugins, or with `/plugin marketplace add sayedhfatimi/claude-skills` in Claude Code, and install `imagegen` from it.
+
 ### Changed
+- **Breaking:** `imagegen` moved from `skills/imagegen` to `plugins/imagegen/skills/imagegen` and ships as a plugin. `install.sh` no longer symlinks it; remove an existing `~/.claude/skills/imagegen` symlink and install the plugin from the marketplace instead.
+- `imagegen` SKILL.md: run `generate.py` by its full path in the skill's own folder, so it works wherever the plugin is installed and images save in the working directory.
+- `refactor-pass` now suggests turning the plan into an implementation plan with superpowers:writing-plans, instead of the removed `/structure-plan`.
 - `imagegen` triggers only on explicit requests for an image file, not loose wording like "visualise" or "diagram". Every call is a paid API request, and in unattended cloud sessions the old casual triggers could spend credits unasked.
 - `imagegen`: in a cloud session, save repo-bound images at their real path and commit them, since the user can't open files on the session's machine.
+
+### Removed
+- **Breaking:** `structure-plan` and `audit-implementation` commands, superseded by model and harness updates and the superpowers planning skills. `install.sh` no longer links them; delete any existing symlinks in `~/.claude/commands/`.
 
 ### Fixed
 - `imagegen` SKILL.md: removed a non-working `import anthropic_imagegen_helper` example.
