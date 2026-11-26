@@ -32,7 +32,7 @@ claude-skills/
 
 ### `imagegen`
 
-Generates images with OpenAI's `gpt-image-2.6-sunburst` model via the [Images API](https://platform.openai.com/docs/api-reference/images). Triggers whenever you ask Claude to generate, draw, render, or refine an image.
+Generates images with OpenAI's `gpt-image-2.6-sunburst` model via the [Images API](https://platform.openai.com/docs/api-reference/images). Triggers only when you explicitly ask Claude to generate or refine an image. It deliberately ignores loose wording like "visualise", because every call is a paid API request.
 
 **Prerequisite:** an `OPENAI_API_KEY`. You don't need to export it manually — `scripts/generate.py` resolves it in this order and stops at the first hit:
 

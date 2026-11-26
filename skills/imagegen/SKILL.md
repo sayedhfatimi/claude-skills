@@ -2,12 +2,12 @@
 name: imagegen
 description: >
   Generate images using OpenAI's gpt-image-2.6-sunburst model via the OpenAI Images API.
-  Use this skill whenever the user asks to generate, create, draw, render, or
-  produce any image — illustrations, concept art, UI mockups, diagrams, icons,
-  product visualisations, or any other visual output. Trigger even for casual
-  phrasings like "make me a picture of...", "draw...", "visualise...", or
-  "create an image of...". Also trigger when the user asks to regenerate or
-  refine a previously generated image. Requires OPENAI_API_KEY in the environment.
+  Use only when the user explicitly asks for an image file to be generated: "generate
+  an image of...", "make me a picture/icon/illustration of...", "create artwork for...",
+  or asks to regenerate or refine an image this skill made. Every call is a paid API
+  request, so do NOT trigger on loose wording like "visualise", "sketch out", "diagram"
+  or "draw up a plan", where a text, Mermaid or SVG answer fits; if unsure, ask first.
+  Requires OPENAI_API_KEY in the environment.
 ---
 
 # Image Generation (gpt-image-2.6-sunburst)
@@ -77,15 +77,13 @@ After generation, tell the user:
 - The final prompt used (so they can iterate)
 - Any relevant notes (e.g. if a detail was simplified to fit the model)
 
+
+**In a cloud session** (Claude Code on the web or mobile), the user can't open files on the session's machine. If the image belongs in the repo (icon, figure, mockup), save it at its real path in the repo and commit it so it shows in the branch/PR diff. Otherwise say plainly that it exists only in the session.
 ---
 
 ## Inline API call (Python)
 
 Use this when running without the script, or for quick one-off calls:
-
-```python
-import anthropic_imagegen_helper as _  # not real — use the pattern below
-```
 
 ```python
 import os, base64, json, urllib.request

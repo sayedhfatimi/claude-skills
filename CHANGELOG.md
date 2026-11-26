@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres
 to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- `imagegen` triggers only on explicit requests for an image file, not loose wording like "visualise" or "diagram". Every call is a paid API request, and in unattended cloud sessions the old casual triggers could spend credits unasked.
+- `imagegen`: in a cloud session, save repo-bound images at their real path and commit them, since the user can't open files on the session's machine.
+
+### Fixed
+- `imagegen` SKILL.md: removed a non-working `import anthropic_imagegen_helper` example.
+
 ## [1.2.0] - 2026-11-22
 
 ### Changed
